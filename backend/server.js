@@ -15,4 +15,7 @@ app.get('/api/chat/:id', (req, res)=>{
     const singleChat = chats.find(c=>c._id ===req.params.id);
     res.send(singleChat);
 })
-app.listen(5000, console.log("Server is running on PORT 5000"));
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log("Server is running on PORT 5000"));
