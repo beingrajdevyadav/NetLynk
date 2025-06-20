@@ -1,16 +1,16 @@
-
+import { Button, HStack } from "@chakra-ui/react"
 import './App.css'
 
 function App() {
-  
+
 
   return (
     <>
+      <HStack>
+        <Button>Click me</Button>
+        <Button>Click me</Button>
+      </HStack>
 
-      <h1>Welcome to the React App</h1>
-      <p>This is a simple React application.</p>
-      <p>Feel free to explore and modify the code!</p>
-      <p>Happy coding!</p>
     </>
   )
 }
