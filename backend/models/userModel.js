@@ -13,12 +13,12 @@ const userModel = mongoose.Schema({
         type: String,
         required: true,
     },
-    pic:{
+    pic: {
         type: String,
         required: true,
         default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon.png"
     }
-}, {timestamps:true});
+}, { timestamps: true });
 
 
 const User = mongoose.model("User", userModel);

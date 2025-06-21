@@ -5,11 +5,11 @@ const chatModel = mongoose.Schema({
         type: String,
         trim: true,
     },
-    isGroupChat:{
-        type:Boolean,
+    isGroupChat: {
+        type: Boolean,
         default: false,
     },
-    users:[{
+    users: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     }],
@@ -18,10 +18,10 @@ const chatModel = mongoose.Schema({
         ref: "Message",
     },
     groupAdmin: {
-        type : mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     }
-}, {timestamps:true});
+}, { timestamps: true });
 
 
 const Chat = mongoose.model("Chat", chatModel);
