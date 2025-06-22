@@ -1,0 +1,35 @@
+.form-container{
+    padding: 2rem;
+}
+.form-control{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+form h2{
+font-weight: 900;
+font-size: 30px;
+margin-bottom: 1rem;
+}
+
+form input{
+    padding: 10px;
+    margin-bottom: .5rem;
+    width: 100%;
+}
+form span{
+    font-size: 12px;
+    cursor: pointer;
+}
+form .btn-box{
+    text-align: end;
+    margin-top: 1rem;
+}
+.btn-box button{
+    width: 150px;
+    background-color: #333;
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
