@@ -36,7 +36,7 @@ const Signup = () => {
                 <span onClick={()=>{setShow2(!show2)}}>{show2?"Hide":"Show"}</span>
             </div>
             <div className="form-control">
-                <input type="file" placeholder='' value={pic} onChange={(e)=>{setPic(e.target.value)}} />
+                <input type="file" placeholder='' value={pic} onChange={(e)=>{setPic(e.target.files[0])}} />
             </div>
 
             <div className="btn-box">
