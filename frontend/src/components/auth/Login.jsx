@@ -5,7 +5,7 @@ const Login = () => {
     const[password, setPassword] = useState();
 const[show, setShow] = useState();
 
-const handleSubmit = (e){
+const handleSubmit = (e)=>{
     e.preventDefault();
 
     console.log("form submitted!");
