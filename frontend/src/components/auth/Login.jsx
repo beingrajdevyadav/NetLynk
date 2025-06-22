@@ -5,9 +5,14 @@ const Login = () => {
     const[password, setPassword] = useState();
 const[show, setShow] = useState();
 
+const handleSubmit = (e){
+    e.preventDefault();
+
+    console.log("form submitted!");
+}
   return (
     <div className='form-container'>
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <h2>Log In Now</h2>
             <div className="form-control">
                 <input type="email" placeholder='Enter Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
