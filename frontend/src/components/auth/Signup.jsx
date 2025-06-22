@@ -7,9 +7,15 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState();
     const [password, setPassword] = useState();
     const [pic, setPic] = useState();
+
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log("Form Submitted.");
+    }
     return (
        <div className='signup'>
-        <form action="">
+        <form action="" onSubmit={handleSubmit}>
             <h2>Sign Up Form</h2>
 
             <div className="form-control">
