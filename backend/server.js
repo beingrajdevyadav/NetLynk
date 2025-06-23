@@ -9,9 +9,8 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 // Connect to MongoDB
-// connectDB();
+connectDB();
 const app = express();
-
 
 app.get('/', (req, res)=>{
     res.send("API is running successfully...");
