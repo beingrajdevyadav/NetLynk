@@ -1,6 +1,12 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const chats = require("./data/data")
+const connectDB = require('./config/db');
+
+// Connect to MongoDB
+connectDB();
+ 
+
 
 const app = express();
 dotenv.config();
