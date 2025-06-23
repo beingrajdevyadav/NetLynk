@@ -11,6 +11,7 @@ dotenv.config();
 // Connect to MongoDB
 connectDB();
 const app = express();
+app.use(express.json()); // Middleware to parse JSON bodies
 
 app.get('/', (req, res)=>{
     res.send("API is running successfully...");
