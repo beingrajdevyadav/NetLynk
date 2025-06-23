@@ -1,12 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const chats = require("./data/data")
+const userRoutes = require('./routes/userRoutes');
 const connectDB = require('./config/db');
 
+
+// Load environment variables from .env file
 dotenv.config();
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
 const app = express();
 
 
