@@ -11,6 +11,8 @@ const Signup = () => {
     const[show1, setShow1] = useState(false);
     const[show2, setShow2] = useState(false);
 
+    // Cloudinary Upload Functionality
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         console.log("Form Submitted.");
