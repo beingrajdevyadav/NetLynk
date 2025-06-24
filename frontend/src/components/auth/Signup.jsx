@@ -11,7 +11,37 @@ const Signup = () => {
     const[show1, setShow1] = useState(false);
     const[show2, setShow2] = useState(false);
 
+
+    const [isLoading, setIsLoading] = useState(false);
+
     // Cloudinary Upload Functionality
+    const handleImageChange = async (e)=>{
+        const file = e.target.files[0];
+        if(!file) return;
+
+        setIsLoading(true);
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "MERNChatApp");
+        data.append("cloud_name", "djoruflrl");
+
+        try {
+            const response = await fetch("https://api.cloudinary.com/v1_1/djoruflrl/image/upload", {
+                method: "POST",
+                body: data
+            });
+            const result = await response.json();
+            setPic(result.secure_url);
+            console.log("Image uploaded successfully:", result.secure_url);
+            setIsLoading(false);
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            setIsLoading(false);
+        }
+
+        console.log("Image uploaded:", pic);
+        console.log("Image URL:", pic);
+    }
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -38,7 +68,8 @@ const Signup = () => {
                 <span onClick={()=>{setShow2(!show2)}}>{show2?"Hide":"Show"}</span>
             </div>
             <div className="form-control">
-                <input type="file" placeholder='' value={pic} onChange={(e)=>{setPic(e.target.files[0])}} />
+                <input type="file" placeholder=''  onChange={handleImageChange} />
+                {isLoading ? <p>Uploading...</p> : pic && <img src={pic} alt="Uploaded" style={{width: "50px", height: "50px"}} />}
             </div>
 
             <div className="btn-box">
