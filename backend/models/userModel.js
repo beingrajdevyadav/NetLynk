@@ -21,12 +21,18 @@ const userSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
+
+
+
+// to hash password before saving the user
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
+    if (!this.modified) {
         return next();
     }
-    // Hash the password before saving
-    this.password = await bcrypt.hash(this.password, 10);
+    
+    const salt = await bcrypt.genSalt(10);
+
+    this.password = await bcrypt.hash(this.password, salt);
     next();
 });
 
