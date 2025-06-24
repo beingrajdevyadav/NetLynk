@@ -84,12 +84,12 @@ const navigate = useNavigate();
          }, config);
 
             console.log("Signup successful:", data);
-            alert("Signup successful! Please login to continue.");
+            // alert("Signup successful! Please login to continue.");
 
 
             localStorage.setItem("userInfo", JSON.stringify(data));
 
-            navigate("/chat");
+            navigate("/chats");
         }catch(error) {
             console.error("Error during signup:", error);
             alert("Error during signup. Please try again.");
