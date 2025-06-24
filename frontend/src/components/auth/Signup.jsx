@@ -1,5 +1,7 @@
 
+import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [name, setName] = useState();
@@ -11,7 +13,7 @@ const Signup = () => {
     const[show1, setShow1] = useState(false);
     const[show2, setShow2] = useState(false);
 
-
+const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     // Cloudinary Upload Functionality
@@ -32,20 +34,68 @@ const Signup = () => {
             });
             const result = await response.json();
             setPic(result.secure_url);
-            console.log("Image uploaded successfully:", result.secure_url);
+            // console.log("Image uploaded successfully:", result.secure_url);
             setIsLoading(false);
         } catch (error) {
             console.error("Error uploading image:", error);
             setIsLoading(false);
         }
 
-        console.log("Image uploaded:", pic);
-        console.log("Image URL:", pic);
+        // console.log("Image uploaded:", pic);
+        // console.log("Image URL:", pic);
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        console.log("Form Submitted.");
+      //  console.log("Form Submitted.");
+
+      // to check if all fields are filled
+        if(!name || !email || !password || !confirmPassword || !pic) {
+            alert("Please fill all the fields");
+            return;
+        }
+
+        // to check if password and confirm password are same
+        if(password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        // to check if password is less than 6 characters
+        if(password.length < 6) {
+            alert("Password must be at least 6 characters long");
+            return;
+        }
+
+        // Here you can add the code to send the data to the server
+
+        try{
+            const config = {
+             headers :{
+                "Content-Type": "application/json",
+            } ,
+         };
+
+         const {data}  = await axios.post("/api/user", {
+            name,
+            email,
+            password,
+            pic
+         }, config);
+
+            console.log("Signup successful:", data);
+            alert("Signup successful! Please login to continue.");
+
+
+            localStorage.setItem("userInfo", JSON.stringify(data));
+
+            navigate("/chat");
+        }catch(error) {
+            console.error("Error during signup:", error);
+            alert("Error during signup. Please try again.");
+        }
+
+
     }
     return (
        <div className='form-container'>
@@ -69,7 +119,7 @@ const Signup = () => {
             </div>
             <div className="form-control">
                 <input type="file" placeholder=''  onChange={handleImageChange} />
-                {isLoading ? <p>Uploading...</p> : pic && <img src={pic} alt="Uploaded" style={{width: "50px", height: "50px"}} />}
+                {isLoading ? <img src={"https://media.tenor.com/khzZ7-YSJW4AAAAM/cargando.gif"} alt="Select DP" style={{width: "50px", height: "50px"}} /> :  <img src={pic} alt="Uploaded" style={{width: "50px", height: "50px"}} />}
             </div>
 
             <div className="btn-box">
