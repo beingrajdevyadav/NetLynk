@@ -29,7 +29,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // to hash password before saving the user
 userSchema.pre("save", async function (next) {
-    if (!this.modified) {
+    if (!this.isModified("password")) {
         return next();
     }
     

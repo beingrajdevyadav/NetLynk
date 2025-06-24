@@ -72,4 +72,4 @@ if(user && (await user.matchPassword(password))) {
 }
 });
 
-module.exports = { registerUser };
+module.exports = { registerUser, authUser };
