@@ -9,7 +9,7 @@ const accessChat = expressAsyncHandler(async (req, res) => {
     if (!userId) {
         console.error("UserId param not sent with request");
         return res.sendStatus(400);
-    } 
+    }
 
     let isChat = await Chat.find({
         isGroupChat: false,
@@ -47,26 +47,57 @@ const accessChat = expressAsyncHandler(async (req, res) => {
 
 
 // to fetch chat
-const fetchChat = expressAsyncHandler(async(req, res)=>{
-try {
-    Chat.find({users: {$elemMatch: {$eq: req.user._id}}})
-    .populate("users", "-password")
-    .populate("latestMessage")
-    .populate("groupAdmin", "-password")
-    .sort({ updatedAt: -1 })
-    .then(async(results)=>{
-        results = await User.populate(results, {
-            path: "latestMessage.sender",
-            select: "name pic email",
+const fetchChat = expressAsyncHandler(async (req, res) => {
+    try {
+        Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+            .populate("users", "-password")
+            .populate("latestMessage")
+            .populate("groupAdmin", "-password")
+            .sort({ updatedAt: -1 })
+            .then(async (results) => {
+                results = await User.populate(results, {
+                    path: "latestMessage.sender",
+                    select: "name pic email",
+                });
+
+
+                res.status(200).send(results);
+            });
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
+});
+
+
+// create group chat controller
+const createGroupChat = expressAsyncHandler(async (req, res) => {
+    if (!req.body.users || !req.body.name) {
+        return res.status(400).send({ message: "Please fill all the fields" });
+    }
+    let users = JSON.parse(req.body.users);
+    if (users.length < 2) {
+        return res.status(400).send("More than 2 users are required to form a group chat");
+    }
+    users.push(req.user);
+    try {
+        const groupChat = await Chat.create({
+            chatName: req.body.name,
+            users: users,
+            isGroupChat: true,
+            groupAdmin: req.user._id
         });
 
+        const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password");
 
-        res.status(200).send(results);
-    });
-} catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+        res.status(200).json(fullGroupChat);
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
 }
-})
+)
 
-module.exports = { accessChat, fetchChat };
+module.exports = { accessChat, fetchChat, createGroupChat };
