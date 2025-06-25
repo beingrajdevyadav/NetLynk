@@ -147,4 +147,27 @@ const addToGroup = expressAsyncHandler(async (req, res) => {
 });
 
 
-module.exports = { accessChat, fetchChat, createGroupChat, renameGroup, addToGroup };
+// remove user from group chat controller
+const removeFromGroup = expressAsyncHandler(async (req, res) => {
+    const { chatId, userId } = req.body;
+
+    const updatedChat = await Chat.findByIdAndUpdate(
+        chatId,
+        {
+            $pull: { users: userId },
+        },
+        { new: true }
+    )
+        .populate("users", "-password")
+        .populate("groupAdmin", "-password");
+
+    if (!updatedChat) {
+        res.status(404);
+        throw new Error("Chat not found");
+    } else {
+        res.json(updatedChat);
+    }
+}
+);
+
+module.exports = { accessChat, fetchChat, createGroupChat, renameGroup, addToGroup , removeFromGroup};
