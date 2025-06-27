@@ -55,15 +55,6 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
           <div className="open-chat"></div>
         </div>
 
-
-
-        <div className="sidedrawer">
-          <div className="search-field">
-            <input type="text" placeholder='Search Here' />
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </div>
-          <div className="results-list"></div>
-        </div>
       </div>
 
 <Sidebar isOpen={sidebarOpen} onClose={()=>setSidebarOpen(false)}/>

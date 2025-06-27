@@ -28,8 +28,16 @@ const Sidebar = ({ isOpen, onClose }) => {
     return (
         <div className='overlay'>
             <div className="sidebar" ref={sidebarRef}>
-                <h2>Sidebar Content</h2>
-                <button onClick={onClose}>close</button>
+                <div className="sidebar-header">
+                    <h3>Search New Users</h3>
+                    <hr />
+                </div>
+
+                <div className="search-field">
+                    <input type="text" placeholder='Search Here' />
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div className="results-list"></div>
             </div>
         </div>
     )

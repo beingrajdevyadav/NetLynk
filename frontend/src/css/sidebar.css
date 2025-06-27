@@ -22,6 +22,35 @@
     animation: slideIn 0.3s ease-in-out;
 }
 
+
+.sidebar-header{
+    color: #444;
+    text-align: center;
+    margin-bottom: .5rem;
+}
+
+.search-field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+
+.search-field input{
+    padding: 15px;
+    width: 100%;
+    /* background-color: #f1f1f1; */
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #ddd;
+    color: #555;
+}
+.search-field i{
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
 @keyframes slideIn {
     from{
         transform: translateX(-100%);

@@ -14,25 +14,7 @@
     padding: .5rem;
     overflow-y: auto;
 }
-.search-field{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: .5rem;
-}
 
-.search-field input{
-    padding: 15px;
-    width: 100%;
-    /* background-color: #f1f1f1; */
-    border-radius: 10px;
-    outline: none;
-    border: 1px solid #ddd;
-}
-.search-field i{
-    font-size: 20px;
-    cursor: pointer;
-}
 .header {
     display: flex;
     justify-content: space-between;
