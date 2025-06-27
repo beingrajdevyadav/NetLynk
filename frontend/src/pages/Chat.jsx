@@ -4,9 +4,11 @@ import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import '../css/chats.css'
 import Sidebar from '../components/Sidebar';
+import Profile from '../components/Profile';
 
 const Chat = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+const [profileOpen, setProfileOpen] = useState(false);
 
   const currentUser = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const Chat = () => {
             </div>
 
             <div className="user">
-              <img src={currentUser.pic} alt="" />
+              <img onClick={()=>setProfileOpen(true)} src={currentUser.pic} alt="" />
             </div>
           </div>
         </div>
@@ -56,7 +58,7 @@ const Chat = () => {
         </div>
 
       </div>
-
+<Profile isOpen={profileOpen} onClose={()=>setProfileOpen(false)}/>
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   )

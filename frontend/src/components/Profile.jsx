@@ -30,16 +30,28 @@ const Profile = ({ isOpen, onClose }) => {
     return (
         <div className='overlay-02'>
             <div className="profile" ref={profileRef}>
-                <div className="profile-pic">
-                    <img src={currentUser.pic} alt={currentUser.name} />
-                </div>
+
                 <div className="profile-info">
-                    <h3>{currentUser.name}</h3>
+                    <div className="profile-header">
+                        <h3>My Profile</h3>
+                        <i className="fa-solid fa-xmark" onClick={onClose}></i>
+                    </div>
+
+<hr />
+                    <div className="profile-pic">
+                        <img src={currentUser.pic} alt={currentUser.name} />
+                    </div>
+
+                    <h2>{currentUser.name}</h2>
                     <p>{currentUser.email}</p>
                 </div>
-                <hr />
+
                 <div className="profile-action">
-                  <span>Logout</span>  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <hr />
+                    <button>
+                        <i className="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
+                    </button>
+
                 </div>
             </div>
         </div>
