@@ -6,7 +6,7 @@ import '../css/chats.css'
 import Sidebar from '../components/Sidebar';
 
 const Chat = () => {
-const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const currentUser = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
 
           <div className="menu-bar">
             <div className="search">
-              <i className="fa-solid fa-magnifying-glass" onClick={()=>setSidebarOpen(true)}></i>
+              <i className="fa-solid fa-magnifying-glass" onClick={() => setSidebarOpen(true)}></i>
             </div>
 
             <div className="bell">
@@ -57,7 +57,7 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
 
       </div>
 
-<Sidebar isOpen={sidebarOpen} onClose={()=>setSidebarOpen(false)}/>
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   )
 }

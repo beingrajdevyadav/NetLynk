@@ -1,6 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../css/sidebar.css"
 const Sidebar = ({ isOpen, onClose }) => {
+const [search, setSearch] = useState("");
+const [searchResult, setSearchResult] = useState([]);
+const [loading, setLoading] = useState(false);
+const [loadingChat, setLoadingChat] = useState();
+
     const sidebarRef = useRef();
 
     useEffect(() => {
