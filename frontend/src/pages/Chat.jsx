@@ -15,7 +15,15 @@ const Chat = () => {
     }
   }, [currentUser, navigate]);
   return (
-    <div><h1>Welcome To Chats Page</h1></div>
+    <div className='chat-page'>
+      <div className="header">
+        <div className="search-bar"></div>
+        <div className="title-bar"></div>
+        <div className="menu-bar">
+          
+        </div>
+      </div>
+    </div>
   )
 }
 

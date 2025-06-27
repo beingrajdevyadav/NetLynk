@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
-import Login from '@/components/auth/Login';
-import Signup from '@/components/auth/Signup';
+import Login from '../components/auth/Login';
+import Signup from '../components/auth/Signup';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const Home = () => {
