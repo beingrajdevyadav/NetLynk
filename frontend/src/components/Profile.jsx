@@ -1,10 +1,14 @@
 import React, { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {clearCurrentUser} from '../redux/features/userSlice'
 import "../css/profile.css"
 
 const Profile = ({ isOpen, onClose }) => {
     const profileRef = useRef();
+
     const currentUser = useSelector((state) => state.user.currentUser);
+   const dispatch = useDispatch();
+   
     useEffect(() => {
         const handleOutsideClick = (e) => {
             if (profileRef.current && !profileRef.current.contains(e.target)) {
@@ -37,7 +41,7 @@ const Profile = ({ isOpen, onClose }) => {
                         <i className="fa-solid fa-xmark" onClick={onClose}></i>
                     </div>
 
-<hr />
+                    <hr />
                     <div className="profile-pic">
                         <img src={currentUser.pic} alt={currentUser.name} />
                     </div>
@@ -48,7 +52,7 @@ const Profile = ({ isOpen, onClose }) => {
 
                 <div className="profile-action">
                     <hr />
-                    <button>
+                    <button onClick={()=>dispatch(clearCurrentUser())}>
                         <i className="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
                     </button>
 
