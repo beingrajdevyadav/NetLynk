@@ -71,18 +71,9 @@
 .open-chat {
     width: 79%;
     position: relative;
-    background-color: #185b32d7;
+    /* background-color: #185b32d7; */
+    background-color: #ddd;
+    border: 3px solid #185b32;
+    overflow-y: auto;
 }
 
-.open-chat::before{
-    content: "";
-    position: absolute;
-    top: 0 ;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/bg.webp");
-    background-position: center;
-    background-size: cover;
-    opacity: 0.8;
-}
