@@ -2,12 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {clearCurrentUser} from '../redux/features/userSlice'
 import "../css/profile.css"
+import { useNavigate } from 'react-router-dom';
 
 const Profile = ({ isOpen, onClose }) => {
     const profileRef = useRef();
 
     const currentUser = useSelector((state) => state.user.currentUser);
    const dispatch = useDispatch();
+   const navigate = useNavigate();
    
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -52,7 +54,7 @@ const Profile = ({ isOpen, onClose }) => {
 
                 <div className="profile-action">
                     <hr />
-                    <button onClick={()=>dispatch(clearCurrentUser())}>
+                    <button onClick={()=>{dispatch(clearCurrentUser()); navigate('/')}}>
                         <i className="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
                     </button>
 
