@@ -1,0 +1,105 @@
+.chat-page{
+    position: relative;
+}
+
+.sidedrawer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 21%;
+    height: 100%;
+    background-color: #f1f1f1;
+    color: #185b32;
+    padding: .5rem;
+    overflow-y: auto;
+}
+.search-field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+
+.search-field input{
+    padding: 15px;
+    width: 100%;
+    /* background-color: #f1f1f1; */
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #ddd;
+}
+.search-field i{
+    font-size: 20px;
+    cursor: pointer;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: #1d6d3c;
+    color: #ddd;
+    padding:1rem .5rem;
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-bar i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+/* ##################  */
+.chat-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 89vh;
+}
+
+.chat-lists {
+    width: 21%;
+    background-color: #f0f0f0;
+    border: 3px solid #185b32;
+    overflow-y: auto;
+}
+.list-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .7rem .5rem;
+    background-color: #185b32;
+    color: #ddd;
+}
+
+.open-chat {
+    width: 79%;
+    position: relative;
+    background-color: #185b32d7;
+}
+
+.open-chat::before{
+    content: "";
+    position: absolute;
+    top: 0 ;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/bg.webp");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+}
