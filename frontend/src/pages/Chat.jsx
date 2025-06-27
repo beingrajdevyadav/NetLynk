@@ -1,10 +1,13 @@
 // import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import '../css/chats.css'
+import Sidebar from '../components/Sidebar';
 
 const Chat = () => {
+const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const currentUser = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
   console.log(currentUser);
@@ -25,7 +28,7 @@ const Chat = () => {
 
           <div className="menu-bar">
             <div className="search">
-              <i className="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass" onClick={()=>setSidebarOpen(true)}></i>
             </div>
 
             <div className="bell">
@@ -63,7 +66,7 @@ const Chat = () => {
         </div>
       </div>
 
-
+<Sidebar isOpen={sidebarOpen} onClose={()=>setSidebarOpen(false)}/>
     </>
   )
 }
