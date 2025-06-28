@@ -8,49 +8,49 @@ const Signup = () => {
     const [email, setEmail] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [password, setPassword] = useState();
-    const [pic, setPic] = useState();
+    // const [pic, setPic] = useState();
 
     const[show1, setShow1] = useState(false);
     const[show2, setShow2] = useState(false);
 
 const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     // Cloudinary Upload Functionality
-    const handleImageChange = async (e)=>{
-        const file = e.target.files[0];
-        if(!file) return;
+    // const handleImageChange = async (e)=>{
+    //     const file = e.target.files[0];
+    //     if(!file) return;
 
-        setIsLoading(true);
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "MERNChatApp");
-        data.append("cloud_name", "djoruflrl");
+    //     setIsLoading(true);
+    //     const data = new FormData();
+    //     data.append("file", file);
+    //     data.append("upload_preset", "MERNChatApp");
+    //     data.append("cloud_name", "djoruflrl");
 
-        try {
-            const response = await fetch("https://api.cloudinary.com/v1_1/djoruflrl/image/upload", {
-                method: "POST",
-                body: data
-            });
-            const result = await response.json();
-            setPic(result.secure_url);
-            // console.log("Image uploaded successfully:", result.secure_url);
-            setIsLoading(false);
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            setIsLoading(false);
-        }
+    //     try {
+    //         const response = await fetch("https://api.cloudinary.com/v1_1/djoruflrl/image/upload", {
+    //             method: "POST",
+    //             body: data
+    //         });
+    //         const result = await response.json();
+    //         setPic(result.secure_url);
+    //         // console.log("Image uploaded successfully:", result.secure_url);
+    //         setIsLoading(false);
+    //     } catch (error) {
+    //         console.error("Error uploading image:", error);
+    //         setIsLoading(false);
+    //     }
 
-        // console.log("Image uploaded:", pic);
-        // console.log("Image URL:", pic);
-    }
+    //     // console.log("Image uploaded:", pic);
+    //     // console.log("Image URL:", pic);
+    // }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
       //  console.log("Form Submitted.");
 
       // to check if all fields are filled
-        if(!name || !email || !password || !confirmPassword || !pic) {
+        if(!name || !email || !password || !confirmPassword ) {
             alert("Please fill all the fields");
             return;
         }
@@ -80,7 +80,7 @@ const navigate = useNavigate();
             name,
             email,
             password,
-            pic
+            // pic
          }, config);
 
             console.log("Signup successful:", data);
@@ -100,8 +100,7 @@ const navigate = useNavigate();
     return (
        <div className='form-container'>
         <form  onSubmit={handleSubmit}>
-            <h2>Sign Up Now</h2>
-
+        
             <div className="form-control">
                 <input type="text" placeholder='Enter Your Name' value={name} onChange={(e)=>{setName(e.target.value)}} />
             </div>
@@ -118,11 +117,11 @@ const navigate = useNavigate();
 
                  <i onClick={() => { setShow2(!show2) }} className={!show2 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
             </div>
-            <div className="form-control">
+            {/* <div className="form-control">
                 <input type="file" placeholder=''  onChange={handleImageChange} />
                 {isLoading ? <img src={"https://media.tenor.com/khzZ7-YSJW4AAAAM/cargando.gif"} alt="Select DP" style={{width: "50px", height: "50px"}} /> :  <img src={pic} alt="Uploaded" style={{width: "50px", height: "50px"}} />}
-            </div>
-
+            </div> */}
+<hr />
             <div className="btn-box">
                 <button type='submit'>Sign Up</button>
             </div>
