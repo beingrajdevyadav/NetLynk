@@ -61,13 +61,13 @@ const Login = () => {
                 </div>
                 <div className="form-control">
                     <input type={show ? "text" : "password"} placeholder='Enter Email' value={password} onChange={(e) => { setPassword(e.target.value) }} />
-                    <span onClick={() => { setShow(!show) }}>{show ? "Hide" : "Show"}</span>
+                    
+                    <i onClick={() => { setShow(!show) }} className={!show?"fa-solid fa-eye-slash":"fa-solid fa-eye"}></i>
                 </div>
 
 
                 <div className="btn-box">
                     <button type='submit'>Log In</button>
-                    <button type='submit'>Get Correct User Credentials</button>
                 </div>
             </form>
         </div>
