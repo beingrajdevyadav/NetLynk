@@ -10,7 +10,6 @@
 .home-container {
     width: 30%;
     height: 75vh;
-    /* border: 2px solid #185b32; */
     border-radius: 4px;
     overflow: hidden;
     background-color: #fff;
@@ -30,7 +29,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
 }
 .home-controls button {
     width: 100px;

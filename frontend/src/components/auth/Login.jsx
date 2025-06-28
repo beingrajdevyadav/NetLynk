@@ -57,15 +57,15 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
                 
                 <div className="form-control">
-                    <input type="email" placeholder='Enter Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                    <input type="email" placeholder='Enter Your Email' value={email} autoComplete='off' onChange={(e) => { setEmail(e.target.value) }} />
                 </div>
                 <div className="form-control">
-                    <input type={show ? "text" : "password"} placeholder='Enter Email' value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                    <input type={show ? "text" : "password"} placeholder='Enter Password' autoComplete='off' value={password} onChange={(e) => { setPassword(e.target.value) }} />
                     
                     <i onClick={() => { setShow(!show) }} className={!show?"fa-solid fa-eye-slash":"fa-solid fa-eye"}></i>
                 </div>
 
-
+<hr />
                 <div className="btn-box">
                     <button type='submit'>Log In</button>
                 </div>

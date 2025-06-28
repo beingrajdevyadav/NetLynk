@@ -23,7 +23,7 @@ const Home = () => {
 
         <div className="home-container">
           <div className="home-header">
-            <h2>NetsApp</h2>
+            <h1>NetsApp</h1>
           </div>
 
           <div className="home-controls">
