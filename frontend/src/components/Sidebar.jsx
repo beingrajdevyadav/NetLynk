@@ -30,6 +30,35 @@ const [loadingChat, setLoadingChat] = useState();
  
     if (!isOpen) return null;
 
+
+    // to handle search input
+    const handleSearch = async () => {
+        if (!search.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+        try {
+            const response = await fetch(`/api/user/search?query=${search}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                setSearchResult(data.users);
+                console.log(data.users)
+            } else {
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching search results:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className='overlay'>
             <div className="sidebar" ref={sidebarRef}>
@@ -39,8 +68,8 @@ const [loadingChat, setLoadingChat] = useState();
                 </div>
 
                 <div className="search-field">
-                    <input type="text" placeholder='Search Here' />
-                    <i className="fa-solid fa-magnifying-glass"></i>
+                    <input type="text"value={search} onChange={(e)=>setSearch(e.target.value)} placeholder='Search Here' />
+                    <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
                 </div>
 
                 <hr />
