@@ -27,14 +27,14 @@ const [loadingChat, setLoadingChat] = useState();
         };
     }, [isOpen, onClose]);
 
-
+ 
     if (!isOpen) return null;
 
     return (
         <div className='overlay'>
             <div className="sidebar" ref={sidebarRef}>
                 <div className="sidebar-header">
-                    <h3>Search New Users</h3>
+                    <h2>Find Your Friends</h2>
                     <hr />
                 </div>
 
@@ -42,6 +42,8 @@ const [loadingChat, setLoadingChat] = useState();
                     <input type="text" placeholder='Search Here' />
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
+
+                <hr />
                 <div className="results-list"></div>
             </div>
         </div>
