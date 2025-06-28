@@ -5,11 +5,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: linear-gradient(to right, #0303033b, #06060622), url('../assets/h-bg.jpg');
 }
 
 .home-container {
     width: 30%;
-    height: 75vh;
+    height: 78vh;
     border-radius: 4px;
     overflow: hidden;
     background-color: #fff;
@@ -53,6 +54,6 @@
 @media screen and (max-width:480px) {
     .home-container {
         width: 90%;
-        height: 80vh;
+        height: 85vh;
     }
 }
