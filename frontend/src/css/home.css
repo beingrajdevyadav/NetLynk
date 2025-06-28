@@ -47,3 +47,13 @@
 .home-controls button.active {
     background-color: #144a26;
 }
+
+
+
+/* Media Query */
+@media screen and (max-width:480px) {
+    .home-container {
+        width: 90%;
+        height: 80vh;
+    }
+}
