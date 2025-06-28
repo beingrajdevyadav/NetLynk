@@ -110,12 +110,13 @@ const navigate = useNavigate();
             </div>
             <div className="form-control">
                 <input type={show1?"text":"password"} placeholder='Enter Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} />
-                <span onClick={()=>setShow1(!show1)}>{show1?"Hide":"Show"}</span>
+
+                <i onClick={() => { setShow1(!show1) }} className={!show1 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
             </div>
             <div className="form-control">
                 <input type={show2?"text":"password"} placeholder='Confirm Password' value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} />
 
-                <span onClick={()=>{setShow2(!show2)}}>{show2?"Hide":"Show"}</span>
+                 <i onClick={() => { setShow2(!show2) }} className={!show2 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
             </div>
             <div className="form-control">
                 <input type="file" placeholder=''  onChange={handleImageChange} />
