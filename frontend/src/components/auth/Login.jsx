@@ -55,7 +55,7 @@ const Login = () => {
     return (
         <div className='form-container'>
             <form onSubmit={handleSubmit}>
-                <h2>Log In Now</h2>
+                
                 <div className="form-control">
                     <input type="email" placeholder='Enter Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
                 </div>
