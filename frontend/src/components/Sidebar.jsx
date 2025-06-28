@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
+import axios from 'axios'
 import "../css/sidebar.css"
+
 const Sidebar = ({ isOpen, onClose }) => {
-const [search, setSearch] = useState("");
-const [searchResult, setSearchResult] = useState([]);
-const [loading, setLoading] = useState(false);
-const [loadingChat, setLoadingChat] = useState();
+    const currentUser = useSelector(state => state.user.currentUser);
+
+
+    const [search, setSearch] = useState("");
+    const [searchResult, setSearchResult] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [loadingChat, setLoadingChat] = useState();
 
     const sidebarRef = useRef();
 
@@ -27,7 +33,7 @@ const [loadingChat, setLoadingChat] = useState();
         };
     }, [isOpen, onClose]);
 
- 
+
     if (!isOpen) return null;
 
 
@@ -37,22 +43,20 @@ const [loadingChat, setLoadingChat] = useState();
             setSearchResult([]);
             return;
         }
-        setLoading(true);
+
         try {
-            const response = await fetch(`/api/user/search?query=${search}`, {
-                method: 'GET',
+            setLoading(true);
+
+            const config = {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    "Authorization": `Bearer ${currentUser.token}`
                 }
-            });
-            const data = await response.json();
-            if (data.success) {
-                setSearchResult(data.users);
-                console.log(data.users)
-            } else {
-                console.error(data.message);
             }
+
+            const { data } = await axios.get(`/api/user?search=${search}`, config);
+            setLoading(false);
+            setSearchResult(data);
+            console.log(data);
         } catch (error) {
             console.error("Error fetching search results:", error);
         } finally {
@@ -68,12 +72,37 @@ const [loadingChat, setLoadingChat] = useState();
                 </div>
 
                 <div className="search-field">
-                    <input type="text"value={search} onChange={(e)=>setSearch(e.target.value)} placeholder='Search Here' />
+                    <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search Here' />
                     <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
                 </div>
 
                 <hr />
-                <div className="results-list"></div>
+
+                <div className="results-list">
+                    <div className={loading?"loader": "loader hide"}>
+
+                    <img src="https://i.gifer.com/origin/8b/8b4d5872105584fe9e2d445bea526eb5_w200.gif" alt="loading" />
+                    </div>
+
+                    <ul>
+                        { !loading && searchResult.length === 0 && search.trim() ? (
+                            <li className='no-result'>No Result Found</li>
+                        ) : null }
+
+                        {
+                            searchResult.map((user) => (
+                                <li key={user._id} className="search-item">
+                                    <img src={user.pic} alt={user.name} />
+                                    <div className="user-info">
+                                        <h4>{user.name}</h4>
+                                    </div>
+                                    <button className='add-btn'>Add</button>
+                                </li>
+                            ))
+
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     )

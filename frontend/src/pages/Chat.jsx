@@ -12,7 +12,7 @@ const [profileOpen, setProfileOpen] = useState(false);
 
   const currentUser = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
-  console.log(currentUser);
+  // console.log(currentUser);
 
   useEffect(() => {
     if (!currentUser) {
