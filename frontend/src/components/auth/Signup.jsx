@@ -1,19 +1,23 @@
 
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setCurrentUser } from '../../redux/features/userSlice';
 
 const Signup = () => {
+    const dispatch = useDispatch();
+
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [password, setPassword] = useState();
     // const [pic, setPic] = useState();
 
-    const[show1, setShow1] = useState(false);
-    const[show2, setShow2] = useState(false);
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
     // const [isLoading, setIsLoading] = useState(false);
 
     // Cloudinary Upload Functionality
@@ -45,52 +49,50 @@ const navigate = useNavigate();
     //     // console.log("Image URL:", pic);
     // }
 
-    const handleSubmit = async (e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-      //  console.log("Form Submitted.");
+        //  console.log("Form Submitted.");
 
-      // to check if all fields are filled
-        if(!name || !email || !password || !confirmPassword ) {
+        // to check if all fields are filled
+        if (!name || !email || !password || !confirmPassword) {
             alert("Please fill all the fields");
             return;
         }
 
         // to check if password and confirm password are same
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
 
         // to check if password is less than 6 characters
-        if(password.length < 6) {
+        if (password.length < 6) {
             alert("Password must be at least 6 characters long");
             return;
         }
 
         // Here you can add the code to send the data to the server
 
-        try{
+        try {
             const config = {
-             headers :{
-                "Content-Type": "application/json",
-            } ,
-         };
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
 
-         const {data}  = await axios.post("/api/user", {
-            name,
-            email,
-            password,
-            // pic
-         }, config);
+            const { data } = await axios.post("/api/user", {
+                name,
+                email,
+                password,
+                "pic": "https://static.thenounproject.com/png/1743563-200.png"
+            }, config);
 
             console.log("Signup successful:", data);
             // alert("Signup successful! Please login to continue.");
-
-
-            localStorage.setItem("userInfo", JSON.stringify(data));
-
+            // localStorage.setItem("userInfo", JSON.stringify(data));
+            dispatch(setCurrentUser(data));
             navigate("/chats");
-        }catch(error) {
+        } catch (error) {
             console.error("Error during signup:", error);
             alert("Error during signup. Please try again.");
         }
@@ -98,35 +100,35 @@ const navigate = useNavigate();
 
     }
     return (
-       <div className='form-container'>
-        <form  onSubmit={handleSubmit}>
-        
-            <div className="form-control">
-                <input type="text" placeholder='Enter Your Name' value={name} onChange={(e)=>{setName(e.target.value)}} />
-            </div>
-            <div className="form-control">
-                <input type="email" placeholder='Enter Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
-            </div>
-            <div className="form-control">
-                <input type={show1?"text":"password"} placeholder='Enter Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} />
+        <div className='form-container'>
+            <form onSubmit={handleSubmit}>
 
-                <i onClick={() => { setShow1(!show1) }} className={!show1 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
-            </div>
-            <div className="form-control">
-                <input type={show2?"text":"password"} placeholder='Confirm Password' value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} />
+                <div className="form-control">
+                    <input type="text" placeholder='Enter Your Name' value={name} onChange={(e) => { setName(e.target.value) }} />
+                </div>
+                <div className="form-control">
+                    <input type="email" placeholder='Enter Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                </div>
+                <div className="form-control">
+                    <input type={show1 ? "text" : "password"} placeholder='Enter Password' value={password} onChange={(e) => { setPassword(e.target.value) }} />
 
-                 <i onClick={() => { setShow2(!show2) }} className={!show2 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
-            </div>
-            {/* <div className="form-control">
+                    <i onClick={() => { setShow1(!show1) }} className={!show1 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                </div>
+                <div className="form-control">
+                    <input type={show2 ? "text" : "password"} placeholder='Confirm Password' value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }} />
+
+                    <i onClick={() => { setShow2(!show2) }} className={!show2 ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                </div>
+                {/* <div className="form-control">
                 <input type="file" placeholder=''  onChange={handleImageChange} />
                 {isLoading ? <img src={"https://media.tenor.com/khzZ7-YSJW4AAAAM/cargando.gif"} alt="Select DP" style={{width: "50px", height: "50px"}} /> :  <img src={pic} alt="Uploaded" style={{width: "50px", height: "50px"}} />}
             </div> */}
-<hr />
-            <div className="btn-box">
-                <button type='submit'>Sign Up</button>
-            </div>
-        </form>
-       </div>
+                <hr />
+                <div className="btn-box">
+                    <button type='submit'>Sign Up</button>
+                </div>
+            </form>
+        </div>
     )
 }
 
