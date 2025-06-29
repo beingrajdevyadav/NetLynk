@@ -39,6 +39,8 @@ const Sidebar = ({ isOpen, onClose }) => {
 
     // to handle search input
     const handleSearch = async () => {
+        setSearchResult([]);
+        
         if (!search.trim()) {
             setSearchResult([]);
             return;

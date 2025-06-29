@@ -20,6 +20,7 @@
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1001;
     animation: slideIn 0.3s ease-in-out;
+    overflow-y: auto;
 }
 
 
@@ -70,8 +71,8 @@
 
 .results-list {
     margin-top: 1rem;
-    max-height: 400px;
-    overflow-y: auto;
+    /* max-height: 400px;
+    overflow-y: auto; */
 
 
 }
