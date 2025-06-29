@@ -19,7 +19,7 @@ const Chat = () => {
 
   // to fetchChats
 
-
+// console.log(chats)
 
   // Fetch chats when the component mounts
   // and whenever currentUser changes
@@ -36,13 +36,6 @@ const Chat = () => {
         setChats(data);
         // console.log("Chats fetched:", data);
 
-        // Extract chatters from the chats data
-        data.map((c)=>{
-          console.log(c.users[1]);
-          setChatters((prevChatters) => [...prevChatters, c.users[1]]);
-        })
-
-        console.log("Chatters fetched:", chatters);
       } catch (error) {
         console.error("Error fetching chats:", error);
         // Handle error appropriately, e.g., show a notification or alert
@@ -96,14 +89,15 @@ const Chat = () => {
             </div>
 
             <ul>
-              {chatters.map((c, i)=>(
-                <li key={i} className="chat-item" onClick={() => console.log(c._id)}>
-                  <img src={c.pic} alt={c.name} />
+              {chats?.map((c, i)=>(
+                <li key={i} className="chat-item" onClick={() => console.log(c.users[1]._id)}>
+                  <img src={c.users[1].pic} alt={c.users[1].name} />
                   <div className="user-info">
-                    <h4>{c.name}</h4>
+                    <h4>{c.users[1].name}</h4>
                     <p>Last message...</p>
                   </div>
                 </li>
+                
               ))}
             </ul>
           </div>
