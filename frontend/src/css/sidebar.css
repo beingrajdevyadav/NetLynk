@@ -29,7 +29,7 @@
     margin-bottom: .5rem;
 }
 
-.search-field{
+.search-field {
     text-align: end;
     margin-bottom: .5rem;
 }
@@ -62,32 +62,77 @@
     background-color: #185b32;
     transition: all 0.5s ease;
 }
+
 .search-field i:hover {
     background-color: #144a26;
 }
 
 
-.results-list{
+.results-list {
     margin-top: 1rem;
     max-height: 400px;
     overflow-y: auto;
-    
+
 
 }
- .results-list .loader {
+
+.results-list .loader {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-.loader.hide{
+
+.loader.hide {
     display: none;
 }
-.loader img{
+
+.loader img {
     width: 50px;
     height: 50px;
-  
+
 }
+
+.results-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.results-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #bbb;
+    cursor: pointer;
+}
+
+.results-list li:hover {
+    background-color: #fbfbfb;
+}
+
+.results-list li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* margin-right: 10px; */
+}
+
+.results-list li button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #185b32;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.results-list li button:hover {
+    background-color: #144a26;
+}
+
 @keyframes slideIn {
     from {
         transform: translateX(-100%);

@@ -63,6 +63,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             setLoading(false);
         }
     };
+    // to handle enter key press
     return (
         <div className='overlay'>
             <div className="sidebar" ref={sidebarRef}>
@@ -86,11 +87,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
                     <ul>
                         { !loading && searchResult.length === 0 && search.trim() ? (
-                            <li className='no-result'>No Result Found</li>
-                        ) : null }
-
-                        {
-                            searchResult.map((user) => (
+                            null
+                        ) : 
+                            (searchResult.map((user) => (
                                 <li key={user._id} className="search-item">
                                     <img src={user.pic} alt={user.name} />
                                     <div className="user-info">
@@ -98,7 +97,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                                     </div>
                                     <button className='add-btn'>Add</button>
                                 </li>
-                            ))
+                            )))
 
                         }
                     </ul>
