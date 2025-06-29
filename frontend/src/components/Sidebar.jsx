@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import axios from 'axios'
 import "../css/sidebar.css"
+import { set } from 'mongoose';
 
 const Sidebar = ({ isOpen, onClose }) => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -66,6 +67,26 @@ const Sidebar = ({ isOpen, onClose }) => {
         }
     };
     // to handle enter key press
+
+    // to access chat with user
+    const accessChat =async (userId)=>{
+       try {
+        setLoadingChat(true);
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${currentUser.token}`,
+            }
+        };
+
+        const {data} =await axios.post("/api/chat", { userId }, config);
+        setLoadingChat(false);
+        console.log("Chat accessed:", data);
+       } catch (error) {
+           console.error("Error accessing chat:", error);
+        
+       }
+    }
     return (
         <div className='overlay'>
             <div className="sidebar" ref={sidebarRef}>
@@ -92,12 +113,12 @@ const Sidebar = ({ isOpen, onClose }) => {
                             null
                         ) : 
                             (searchResult.map((user) => (
-                                <li key={user._id} className="search-item">
+                                <li key={user._id} className="search-item" onClick={()=>accessChat(user._id)}>
                                     <img src={user.pic} alt={user.name} />
                                     <div className="user-info">
                                         <h4>{user.name}</h4>
                                     </div>
-                                    <button className='add-btn'>Chat</button>
+                                    
                                 </li>
                             )))
 
