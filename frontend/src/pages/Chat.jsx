@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom';
@@ -8,16 +8,57 @@ import Profile from '../components/Profile';
 
 const Chat = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-const [profileOpen, setProfileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+
+  const [chatters, setChatters] = useState([]);
+  const [chats, setChats] = useState([]);
 
   const currentUser = useSelector(state => state.user.currentUser);
   const navigate = useNavigate();
   // console.log(currentUser);
 
+  // to fetchChats
+
+
+
+  // Fetch chats when the component mounts
+  // and whenever currentUser changes
+  useEffect(() => {
+    const fetchChats = async () => {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${currentUser.token}` // Assuming you have a token in currentUser
+          }
+        }
+        const { data } = await axios.get('/api/chat', config);
+        setChats(data);
+        // console.log("Chats fetched:", data);
+
+        // Extract chatters from the chats data
+        data.map((c)=>{
+          console.log(c.users[1]);
+          setChatters((prevChatters) => [...prevChatters, c.users[1]]);
+        })
+
+        console.log("Chatters fetched:", chatters);
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+        // Handle error appropriately, e.g., show a notification or alert
+      }
+    }
+
+    fetchChats();
+
+  }, [chatters, currentUser.token]);
+
+  // Redirect to home if no user is logged in
   useEffect(() => {
     if (!currentUser) {
       navigate('/');
     }
+
   }, [currentUser, navigate]);
   return (
     <>
@@ -38,7 +79,7 @@ const [profileOpen, setProfileOpen] = useState(false);
             </div>
 
             <div className="user">
-              <img onClick={()=>setProfileOpen(true)} src={currentUser.pic} alt="" />
+              <img onClick={() => setProfileOpen(true)} src={currentUser.pic} alt="" />
             </div>
           </div>
         </div>
@@ -53,12 +94,24 @@ const [profileOpen, setProfileOpen] = useState(false);
                 <span> Create Group </span>
               </div>
             </div>
+
+            <ul>
+              {chatters.map((c, i)=>(
+                <li key={i} className="chat-item" onClick={() => console.log(c._id)}>
+                  <img src={c.pic} alt={c.name} />
+                  <div className="user-info">
+                    <h4>{c.name}</h4>
+                    <p>Last message...</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="open-chat"></div>
         </div>
 
       </div>
-<Profile isOpen={profileOpen} onClose={()=>setProfileOpen(false)}/>
+      <Profile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   )
