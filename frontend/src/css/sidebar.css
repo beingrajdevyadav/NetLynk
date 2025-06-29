@@ -121,12 +121,13 @@
 }
 
 .results-list li button {
-    padding: 5px 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     background-color: #185b32;
     color: white;
     cursor: pointer;
+    font-size: 12px;
     transition: background-color 0.3s ease;
 }
 

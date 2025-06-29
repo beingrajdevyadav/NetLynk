@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     // to handle search input
     const handleSearch = async () => {
         setSearchResult([]);
-        
+
         if (!search.trim()) {
             setSearchResult([]);
             return;
@@ -97,7 +97,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                                     <div className="user-info">
                                         <h4>{user.name}</h4>
                                     </div>
-                                    <button className='add-btn'>Add</button>
+                                    <button className='add-btn'>Chat</button>
                                 </li>
                             )))
 
