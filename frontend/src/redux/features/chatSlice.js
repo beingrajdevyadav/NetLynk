@@ -1,25 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const localData = JSON.parse(localStorage.getItem("chatInfo"));
-const initialState = {
-    chats: localData ? localData : null,
-}
 
 const chatSlice = createSlice({
     name: "chat",
-    initialState,
+    initialState: {
+        selectedChat: null,
+        chats: [],
+    },
     reducers: {
-        seChats: (state, action) => {
-            localStorage.setItem("chatInfo", JSON.stringify(action.payload));
+        setSelectedChat: (state, action) => {
+            state.selectedChat = action.payload;
+        },
+        setChats: (state, action) => {
             state.chats = action.payload;
         },
-        clearCurrentChat: (state) => {
-            state.currentChat = null;
-            localStorage.removeItem("chatInfo");
+        addNewChat: (state, action) => {
+            state.chats.push(action.payload);
+        },
+        clearSelectedChat: (state) => {
+            state.selectedChat = null;
         }
     }
 });
 
 
-export const { setCurrentChat, clearCurrentChat } = chatSlice.actions;
+export const {setSelectedChat, setChats, addNewChat, clearSelectedChat } = chatSlice.actions;
 export default chatSlice.reducer;
